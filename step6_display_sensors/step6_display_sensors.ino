@@ -33,7 +33,7 @@ void loop() {
   irDistance = constrain(irDistance, 20, 120);
   int curRow = convertToPixel(irDistance);
   
-  float usDistance = readDistUS();
+  float usDistance = readDistUs();
   usDistance = constrain(usDistance, 20, 120);
   int curCol = convertToPixel(usDistance);
   
@@ -62,15 +62,14 @@ int convertToPixel(float dist)
   return (int) constrain((constrained - 20) / 7, 0, 7);
 }
 
-float readDistUS(){
-  // speed of sound is 340 meters per second
-  // sound traverses twice
-  // time is measured in microseconds
-  // distance is measured in centimeters
-  return readPulseUS() * (340.0 * 100.0) / (2.0 * 1000.0 * 1000.0);    
+float readDistUs()
+{
+  const float speedOfSoundMPerSec = 340.0;
+  const float speedOfSoundCmPerUs = speedOfSoundMPerSec / 10000.0;
+  return readPulseUs() * speedOfSoundCmPerUs / 2.0;    
 }
 
-float readPulseUS()
+float readPulseUs()
 {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);

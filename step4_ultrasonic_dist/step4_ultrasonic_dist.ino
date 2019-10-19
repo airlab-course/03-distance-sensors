@@ -15,12 +15,11 @@ void loop() {
   delay(150);
 }
 
-float readDist(){
-  // speed of sound is 340 meters per second
-  // sound traverses twice
-  // time is measured in microseconds
-  // distance is measured in centimeters
-  return readPulse() * (340.0 * 100.0) / (2.0 * 1000.0 * 1000.0);    
+float readDist()
+{
+  const float speedOfSoundMPerSec = 340.0;
+  const float speedOfSoundCmPerUs = speedOfSoundMPerSec / 10000.0;
+  return readPulse() * speedOfSoundCmPerUs / 2.0;    
 }
 
 float readPulse()
@@ -33,4 +32,3 @@ float readPulse()
 
   return duration;
 }
-
