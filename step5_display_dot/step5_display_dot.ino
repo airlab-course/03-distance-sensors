@@ -14,9 +14,8 @@ void setup()
 }
 
 void loop() {
-  lc.setLed(0, 3, 3, true);
+  lc.setLed(0, 3, 4, true);
   delay(500);
-  lc.setLed(0, 3, 3, false);
+  lc.setLed(0, 3, 4, false);
   delay(500);
 }
-
